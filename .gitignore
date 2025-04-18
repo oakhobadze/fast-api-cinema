@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.log
+
+# Virtual environment
+venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Databases
+*.db
+*.sqlite3
+
+# Env files
+.env
+*.env
+
+# Migrations (если используешь alembic)
+migrations/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+coverage.xml
+.cache/
+
+# Pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# VSCode Python settings
+.vscode/settings.json
