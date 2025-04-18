@@ -23,6 +23,25 @@ movie_directors = Table(
     Column("director_id", ForeignKey("directors.id"), primary_key=True),
 )
 
+class MovieReaction(Base):
+    __tablename__ = 'movie_reactions'
+
+    id = Column(Integer, primary_key=True, index=True)
+    movie_id = Column(Integer, ForeignKey('movies.id'))
+    reaction = Column(String, nullable=False)
+
+    movie = relationship("Movie", back_populates="movie_reactions")
+
+class Comment(Base):
+    __tablename__ = "comments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(String, nullable=False)
+    movie_id = Column(Integer, ForeignKey("movies.id"))
+
+    movie = relationship("Movie", back_populates="comments")
+
+
 class Genre(Base):
     __tablename__ = "genres"
 
@@ -76,3 +95,5 @@ class Movie(Base):
     genres = relationship("Genre", secondary=movie_genres, back_populates="movies")
     stars = relationship("Star", secondary=movie_stars, back_populates="movies")
     directors = relationship("Director", secondary=movie_directors, back_populates="movies")
+    movie_reactions = relationship("MovieReaction", back_populates="movie")
+    comments = relationship("Comment", back_populates="movie", cascade="all, delete")
