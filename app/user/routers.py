@@ -38,3 +38,29 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
 @router.get("/me", response_model=schemas.UserRead)
 def read_current_user(current_user: User = Depends(get_current_user)):
     return current_user
+
+@router.post("/change-password")
+def change_password(
+    current_password: str,
+    new_password: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    try:
+        return services.change_password_with_current(db, current_user, current_password, new_password)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.post("/reset-password-request")
+def reset_password_request(email: str, new_password: str, db: Session = Depends(get_db)):
+    try:
+        return services.reset_password_request(db, email, new_password)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.get("/reset-password/{token}")
+def reset_password(token: str, new_password: str, db: Session = Depends(get_db)):
+    try:
+        return services.reset_password(db, token, new_password)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
