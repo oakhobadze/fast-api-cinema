@@ -25,6 +25,7 @@ class User(Base):
 
     group = relationship("UserGroup", back_populates="users")
     cart = relationship("Cart", uselist=False, back_populates="user")
+    orders = relationship("Order", back_populates="user")
     activation_token = relationship("ActivationToken", uselist=False, back_populates="user")
 
 
