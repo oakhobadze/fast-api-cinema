@@ -9,7 +9,7 @@ SMTP_PASS = "xxhj xshz ucyi hqjm"
 
 def send_activation_email(to_email: str, token: str):
     subject = "Activate your account"
-    link = f"http://127.0.0.1:8000/users/activate/{token}"
+    link = f"http://localhost:8000/users/activate/{token}"
     body = f"Click the link to activate your account: {link}"
 
     message = MIMEMultipart()
